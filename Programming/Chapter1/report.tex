@@ -1,0 +1,170 @@
+\documentclass[a4paper]{article}
+\usepackage[affil-it]{authblk}
+
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+\begin{document}
+% =================================================
+\title{Numerical Analysis Programming Homework 1}
+
+\author{DAVE JOVAN TANDIONO 3210300364
+    \thanks{Electronic address: minmindjt@gmail.com}}
+\affil{Information and Mathematical Science 2101, Zhejiang University }
+
+\date{Due time: October 07, 2024}
+
+\maketitle
+
+\begin{abstract}
+    This report discusses the implementation of three numerical methods for solving nonlinear equations: the Bisection method, Newton's method, and the Secant method. The methods were encapsulated within a C++ package. Results of the implementations were tested on various functions and intervals, and the roots were computed. 
+\end{abstract}
+
+\section*{Problem A: Implementing the Bisection, Newton, and Secant Methods}
+
+In this problem, the Bisection method, Newton's method, and the Secant method were implemented by designing an abstract base class \texttt{EquationSolver}, which defines a pure virtual function \texttt{solve()} to represent the contract for solving nonlinear equations. Each of the methods was encapsulated within its own derived class inheriting from the base class.
+
+The structure of the classes is as follows:
+\begin{itemize}
+    \item \texttt{BisectionMethod}: Implements the bisection method, which repeatedly bisects an interval and selects subintervals where the root lies.
+    \item \texttt{NewtonMethod}: Implements Newton's method, which uses the derivative of the function to iteratively approximate the root.
+    \item \texttt{SecantMethod}: Implements the secant method, which is similar to Newton's method but does not require the derivative.
+\end{itemize}
+
+Below is an excerpt of the class structure:
+\begin{lstlisting}
+// Base class for solvers
+class EquationSolver {
+protected:
+    const Function& func;
+
+public:
+    EquationSolver(const Function& f) : func(f) {}
+    virtual double solve(double initialGuess1, double initialGuess2, int maxIterations) = 0;
+    virtual ~EquationSolver() = default;
+};
+\end{lstlisting}
+
+Each derived class implements the specific numerical method in the \texttt{solve()} function.
+
+\section*{Problem B: Testing the Bisection Method}
+
+The bisection method was tested on four functions and intervals as described in the problem. The results, including the roots and the number of iterations taken, are presented below:
+
+\begin{itemize}
+    \item Function: \( f_1(x) = \frac{1}{x} - \tan(x) \) on \( [0, \frac{\pi}{2}] \), Root: 0.860333.
+    \item Function: \( f_2(x) = \frac{1}{x} - 2^x \) on \( [0, 1] \), Root: 0.641186.
+    \item Function: \( f_3(x) = 2^{-x} + e^x + 2\cos(x) - 6 \) on \( [1, 3] \), Root: 1.82938.
+    \item Function: \( f_4(x) = \frac{x^3 + 4x^2 + 3x + 5}{2x^3 - 9x^2 + 18x - 2} \) on \( [0, 4] \), Root: 0.117877.
+\end{itemize}
+
+These results confirm the correctness and effectiveness of the bisection method in approximating the roots of these nonlinear functions.
+
+\section*{Problem C: Testing Newton's Method}
+
+Newton's method was tested on the function \( f(x) = x - \tan(x) \), with initial guesses close to the roots at 4.5 and 7.7. The method relies on the derivative of the function to converge to the root.
+
+The derivative of \( f(x) = x - \tan(x) \) is given by:
+\[
+f'(x) = 1 - \frac{1}{\cos^2(x)}
+\]
+
+The results for the roots are:
+\begin{itemize}
+    \item Root near 4.5: \( x = 4.49341 \)
+    \item Root near 7.7: \( x = 7.72525 \)
+\end{itemize}
+
+These results demonstrate that Newton's method converges quickly and accurately when the initial guess is close to the root.
+
+\section*{Problem D: Testing the Secant Method}
+
+The secant method was tested on the following functions and initial values:
+\begin{itemize}
+    \item \( f_1(x) = \sin(x / 2) - 1 \), Initial values: \( x_0 = 0, x_1 = \frac{\pi}{2} \), Root: 3.1388.
+    \item \( f_2(x) = e^x - \tan(x) \), Initial values: \( x_0 = 1, x_1 = 1.4 \), Root: 1.30633.
+    \item \( f_3(x) = x^3 - 12x^2 + 3x + 1 \), Initial values: \( x_0 = 0, x_1 = -0.5 \), Root: -0.188685.
+\end{itemize}
+
+These results show the secant method's ability to approximate roots without requiring the derivative of the function, though the method can be sensitive to the choice of initial values.
+
+\section*{Problem E: Depth of Water in a Semi-Circular Trough}
+
+Given the volume equation for the water in a semi-circular trough:
+
+\[
+V = L \left( 0.5\pi r^2 - r^2 \arcsin \left( \frac{h}{r} \right) - h \sqrt{r^2 - h^2} \right)
+\]
+
+where \( L = 10 \) ft, \( r = 1 \) ft, and \( V = 12.4 \) ft³, we were tasked with solving for \( h \) (the depth of the water) using the Bisection method, Newton's method, and the Secant method. The equation was solved for \( h \) to within an accuracy of 0.01 ft.
+
+The function implemented to solve the equation was:
+
+\[
+f(h) = L \left( 0.5\pi r^2 - r^2 \arcsin \left( \frac{h}{r} \right) - h \sqrt{r^2 - h^2} \right) - V
+\]
+
+The results from the different methods were as follows:
+
+\begin{itemize}
+    \item **Bisection method result**: \( h = 0.166165 \) ft
+    \item **Newton's method result**: \( h = 0.166166 \) ft
+    \item **Secant method result**: \( h = 0.166166 \) ft
+\end{itemize}
+
+These results are consistent, with all methods converging to the same solution for the depth of the water.
+
+\section*{Problem F: Vehicle Failure Angles}
+
+In this problem, we consider the maximum angle \( \alpha \) that a vehicle can negotiate without experiencing nose-in failure, given the equation:
+
+\[
+A \sin \alpha \cos \alpha + B \sin^2 \alpha - C \cos \alpha - E \sin \alpha = 0
+\]
+
+where:
+
+\[
+A = l \sin \beta_1, \quad B = l \cos \beta_1, \quad C = (h + 0.5D) \sin \beta_1 - 0.5 D \tan \beta_1, \quad E = (h + 0.5D) \cos \beta_1 - 0.5 D
+\]
+
+The task was to verify and calculate \( \alpha \) using Newton's method and the Secant method for different values of \( D \).
+
+\subsection*{(a) Using Newton's method with \( D = 55 \)}
+
+Using Newton's method with an initial guess of \( 33^\circ \), we obtained:
+
+\[
+\alpha = 32.9722^\circ
+\]
+
+This verifies the approximate value of \( \alpha \) as \( 33^\circ \).
+
+\subsection*{(b) Using Newton's method with \( D = 30 \)}
+
+For \( D = 30 \), the result was:
+
+\[
+\alpha = 33.1689^\circ
+\]
+
+\subsection*{(c) Using the Secant method}
+
+Using the Secant method with initial guesses far from \( 33^\circ \), the result was:
+
+\[
+\alpha = -11.5^\circ
+\]
+
+This demonstrates that the Secant method can produce erroneous results when the initial guesses are too far from the expected solution. The failure occurs because the method relies on the initial values being reasonably close to the root.
+
+\section*{\center{\normalsize {Acknowledgment}}}
+I would like to acknowledge the assistance of ChatGPT, which provided valuable insights and support in understanding the concepts, structuring the solutions, and developing the code for this assignment. 
+
+\end{document}
