@@ -25,4 +25,4 @@ This Makefile manages the compilation and execution of various C++ programs for 
 - **report**: Compiles the LaTeX report file `report.tex` into `report.pdf` using `xelatex`. Ensure all required LaTeX packages are installed.
 
 ### Cleanup
-- **clean**: Removes all compiled executables (`B`, `C`, `D`, `E`, `F`) and any temporary `.txt` files.
+- **clean**: Removes all compiled executables (`B`, `C`, `D`, `E`, `F`), temporary `.txt` files, and auxiliary LaTeX files (`.log`, `.aux`, `.out`, `.pdf`) created during compilation.
