@@ -26,6 +26,3 @@ This Makefile manages the compilation and execution of various C++ programs for 
 
 ### Cleanup
 - **clean**: Removes all compiled executables (`B`, `C`, `D`, `E`, `F`) and any temporary `.txt` files.
-
-## Notes
-- Adjust Python commands to `python3` if needed on non-Windows platforms.
