@@ -1,4 +1,4 @@
-# Makefile
+#Makefile
 
 # Compiler and flags
 CXX = g++
@@ -23,12 +23,12 @@ F: F.cpp interpolation.cpp
 # Target to run the B program and generate B plot
 run_B: B
 	./B
-	python B.py  # Use 'python' instead of 'python3' on Windows
+	python3 B.py  
 
 # Target to run the C program and generate C plot
 run_C: C
 	./C
-	python C.py  # Use 'python' instead of 'python3' on Windows
+	python3 C.py  
 
 # Target to run the D program (no plot required)
 run_D: D
@@ -41,8 +41,7 @@ run_E: E
 # Target to run the F program and generate F plot
 run_F: F
 	./F
-	python F.py  # Use 'python' instead of 'python3' on Windows
-
+	python3 F.py  
 
 # General run target to run all programs and generate plots for B, C and F
 run_all: run_B run_C run_D run_E run_F
@@ -51,7 +50,8 @@ run_all: run_B run_C run_D run_E run_F
 report: report.tex
 	xelatex report.tex
 	xelatex report.tex
+	rm *.log *.aux
 
-# Clean up executable files
+# Clean up executable files and auxiliary files generated during LaTeX compilation
 clean:
-	rm -f B C D E F *.txt *.log *.aux *.out
+	rm -f B C D E F *.txt *.log *.aux *.out *.pdf
