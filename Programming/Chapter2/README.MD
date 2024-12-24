@@ -26,3 +26,6 @@ This Makefile manages the compilation and execution of various C++ programs for 
 
 ### Cleanup
 - **clean**: Removes all compiled executables (`B`, `C`, `D`, `E`, `F`), temporary `.txt` files, and auxiliary LaTeX files (`.log`, `.aux`, `.out`, `.pdf`) created during compilation.
+
+### Notes
+Use 'python' instead of 'python3' on Windows
