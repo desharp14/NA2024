@@ -23,12 +23,12 @@ F: F.cpp interpolation.cpp
 # Target to run the B program and generate B plot
 run_B: B
 	./B
-	python3 B.py  
+	python3 B.py  # Use 'python' instead of 'python3' on Windows
 
 # Target to run the C program and generate C plot
 run_C: C
 	./C
-	python3 C.py  
+	python3 C.py  # Use 'python' instead of 'python3' on Windows
 
 # Target to run the D program (no plot required)
 run_D: D
@@ -41,7 +41,7 @@ run_E: E
 # Target to run the F program and generate F plot
 run_F: F
 	./F
-	python3 F.py  
+	python3 F.py  # Use 'python' instead of 'python3' on Windows
 
 # General run target to run all programs and generate plots for B, C and F
 run_all: run_B run_C run_D run_E run_F
