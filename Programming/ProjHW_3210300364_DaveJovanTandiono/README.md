@@ -1,9 +1,7 @@
-# Splinify: A Comprehensive Spline Implementation and Curve Fitting Library
-
 ## Project Structure
 
 ```
-Splinify/
+ProjHW_3210300364_DaveJovanTandiono/
 ├── src/                      # C++ source code
 │   ├── main.cpp              # Main program entry
 │   ├── SplineUtils/          # Spline function implementations
